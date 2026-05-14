@@ -47,25 +47,57 @@ st.markdown("""
         color: #000000;
     }
     
-    .main {
-        background:
-            radial-gradient(circle at top left, rgba(56, 189, 248, 0.10), transparent 28%),
-            radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent 24%),
-            linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%);
-    }
+.main {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(59,130,246,0.22), transparent 25%),
+        radial-gradient(circle at 85% 15%, rgba(14,165,233,0.18), transparent 22%),
+        radial-gradient(circle at 70% 80%, rgba(99,102,241,0.18), transparent 24%),
+        linear-gradient(145deg, #020617 0%, #0f172a 40%, #111827 100%);
     
+    min-height: 100vh;
+    color: white;
+}
     /* Page Header */
-    .page-header {
-        background: linear-gradient(135deg, #0f172a 0%, #1e40af 55%, #0ea5e9 100%);
-        color: white;
-        padding: 3rem 2rem;
-        border-radius: 20px;
-        margin-bottom: 2rem;
-        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.18);
-        border: 1px solid rgba(255,255,255,0.18);
-        position: relative;
-        overflow: hidden;
-    }
+.page-header {
+    position: relative;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(15,23,42,0.95),
+            rgba(30,64,175,0.88),
+            rgba(14,165,233,0.82)
+        );
+
+    border-radius: 30px;
+
+    padding: 4rem 3rem;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.45),
+        inset 0 1px 1px rgba(255,255,255,0.08);
+}
+    .page-header::before {
+    content: "";
+
+    position: absolute;
+
+    width: 400px;
+    height: 400px;
+
+    background: rgba(255,255,255,0.08);
+
+    border-radius: 50%;
+
+    top: -200px;
+    right: -100px;
+
+    filter: blur(10px);
+}
 
     .page-header::after {
         content: "";
@@ -95,23 +127,36 @@ st.markdown("""
     }
     
     /* Card Styling */
-    .card {
-        background: rgba(255, 255, 255, 0.92);
-        backdrop-filter: blur(10px);
-        border-radius: 18px;
-        padding: 2rem;
-        border: 1px solid rgba(226, 232, 240, 0.9);
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-        margin-bottom: 1.5rem;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        color: #000000;
-    }
-    
-    .card:hover {
-        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.10);
-        border-color: rgba(59, 130, 246, 0.30);
-        transform: translateY(-3px);
-    }
+.card {
+    background: rgba(15, 23, 42, 0.62);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 24px;
+
+    padding: 2rem;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.35),
+        inset 0 1px 1px rgba(255,255,255,0.08);
+
+    margin-bottom: 1.5rem;
+
+    transition: all 0.35s ease;
+
+    color: #f8fafc;
+}
+.card:hover {
+    transform: translateY(-6px) scale(1.01);
+
+    border-color: rgba(59,130,246,0.35);
+
+    box-shadow:
+        0 20px 50px rgba(59,130,246,0.18),
+        0 10px 40px rgba(0,0,0,0.45);
+}
     
     .card-header {
         font-size: 1.5rem;
@@ -125,23 +170,38 @@ st.markdown("""
     }
     
     /* Button Styling */
-    .stButton > button {
-        background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 55%, #0ea5e9 100%);
-        color: white !important;
-        border: none;
-        border-radius: 999px;
-        padding: 0.9rem 1.8rem;
-        font-weight: 600;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 24px rgba(29, 78, 216, 0.22);
-        letter-spacing: 0.3px;
-    }
+  .stButton > button {
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #06b6d4
+        );
+
+    color: white !important;
+
+    border: none;
+
+    border-radius: 18px;
+
+    padding: 0.9rem 1.4rem;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 10px 25px rgba(37,99,235,0.35);
+
+    transition: all 0.3s ease;
+}
     
-    .stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 14px 26px rgba(29, 78, 216, 0.28);
-    }
+   .stButton > button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 18px 40px rgba(37,99,235,0.4);
+
+    filter: brightness(1.05);
+}
     
     .stButton > button:active {
         transform: translateY(-1px);
@@ -157,7 +217,21 @@ st.markdown("""
         padding-top: 1rem;
         padding-bottom: 0.5rem;
     }
-    
+    .stSlider > div[data-baseweb="slider"] {
+    padding-top: 1rem;
+}
+.stSlider [role="slider"] {
+    background: white !important;
+
+    border: 4px solid #38bdf8 !important;
+
+    width: 22px !important;
+    height: 22px !important;
+
+    box-shadow:
+        0 0 20px rgba(56,189,248,0.8);
+}
+
     .stSlider > div > div > div > input {
         border-radius: 8px;
         border: 2px solid var(--primary-light);
@@ -216,24 +290,42 @@ st.markdown("""
     }
     
     /* Alert Boxes */
-    .alert-success {
-        background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
-        border-left: 4px solid var(--success);
-        padding: 1.5rem;
-        border-radius: 16px;
-        margin: 1.5rem 0;
-        box-shadow: 0 8px 24px rgba(5, 150, 105, 0.08);
-    }
-    
-    .alert-danger {
-        background: linear-gradient(135deg, #fef2f2 0%, #fef1f2 100%);
-        border-left: 4px solid var(--danger);
-        padding: 1.5rem;
-        border-radius: 16px;
-        margin: 1.5rem 0;
-        box-shadow: 0 8px 24px rgba(220, 38, 38, 0.08);
-    }
-    
+.alert-success {
+    background: linear-gradient(
+        135deg,
+        rgba(6, 78, 59, 0.95),
+        rgba(5, 150, 105, 0.85)
+    );
+
+    color: white;
+
+    border-radius: 20px;
+    padding: 1.5rem;
+
+    border: 1px solid rgba(16,185,129,0.25);
+
+    box-shadow:
+        0 10px 30px rgba(16,185,129,0.2);
+}
+.alert-danger {
+    background: linear-gradient(
+        135deg,
+        rgba(127, 29, 29, 0.95),
+        rgba(220, 38, 38, 0.85)
+    );
+
+    border: 1px solid rgba(248,113,113,0.25);
+
+    color: white;
+
+    padding: 1.5rem;
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(220,38,38,0.25);
+
+    backdrop-filter: blur(10px);
+}
     .alert-warning {
         background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
         border-left: 4px solid var(--warning);
