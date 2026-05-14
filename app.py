@@ -451,22 +451,39 @@ if page == "🔍 Prediction":
     
     # Quick Demo Section
     st.markdown("### Quick Demo Cases")
-    
+
     col1, col2, col3 = st.columns(3)
-    
+
     with col1:
         if st.button("📋 Load Benign Sample", use_container_width=True):
+
             st.session_state.sample_values = benign_sample
+
+            for idx, val in enumerate(benign_sample):
+                st.session_state[f"slider_{idx}"] = val
+
             st.rerun()
-    
+
     with col2:
         if st.button("⚠️ Load Malignant Sample", use_container_width=True):
+
             st.session_state.sample_values = malignant_sample
+
+            for idx, val in enumerate(malignant_sample):
+                st.session_state[f"slider_{idx}"] = val
+
             st.rerun()
-    
+
     with col3:
         if st.button("🔄 Reset to Defaults", use_container_width=True):
-            st.session_state.sample_values = feature_means.tolist()
+
+            default_values = feature_means.tolist()
+
+            st.session_state.sample_values = default_values
+
+            for idx, val in enumerate(default_values):
+                st.session_state[f"slider_{idx}"] = val
+
             st.rerun()
     
     # Input Section
