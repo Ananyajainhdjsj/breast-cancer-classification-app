@@ -11,7 +11,7 @@ import plotly.express as px
 # ============================================================
 st.set_page_config(
     page_title="Breast Cancer Classification System",
-    page_icon="🏥",
+    page_icon="💙",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -154,14 +154,34 @@ st.markdown("""
     
     /* Input & Slider */
     .stSlider {
-        padding-top: 0.5rem;
+        padding-top: 1rem;
+        padding-bottom: 0.5rem;
     }
     
     .stSlider > div > div > div > input {
-        border-radius: 6px;
-        border: 1.5px solid var(--border);
-        background: white;
+        border-radius: 8px;
+        border: 2px solid var(--primary-light);
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
         color: var(--text-dark);
+        height: 40px;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    }
+    
+    .stSlider > div > div > div > input:hover {
+        border-color: #0ea5e9;
+        box-shadow: 0 6px 16px rgba(59, 130, 246, 0.25);
+    }
+    
+    .stSlider > div > div > span {
+        color: #1e40af;
+        font-weight: 500;
+    }
+    
+    /* Slider Track */
+    .stSlider > div > div > div:nth-child(1) {
+        background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(14, 165, 233, 0.3));
+        border-radius: 999px;
+        height: 6px;
     }
     
     /* Metric Cards */
@@ -246,7 +266,7 @@ st.markdown("""
     
     /* Sidebar */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        background: linear-gradient(180deg, #f0f4f9 0%, #d9e8f5 50%, #e8f1fa 100%);
         color: #000000;
     }
 
@@ -348,8 +368,22 @@ st.markdown("""
         }
     }
     
+    @keyframes smoothFade {
+        from {
+            opacity: 0.8;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
     .card {
-        animation: slideIn 0.4s ease-out;
+        animation: slideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    /* Smooth gradient transitions */
+    * {
+        transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -384,12 +418,12 @@ feature_info = {
 # SIDEBAR NAVIGATION
 # ============================================================
 with st.sidebar:
-    st.markdown('<div class="sidebar-title">🏥 Medical AI System</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-title">Healthcare AI System</div>', unsafe_allow_html=True)
     st.markdown("---")
     
     page = st.radio(
         "Navigation",
-        ["🔍 Prediction", "📊 Analytics", "ℹ️ About"],
+        ["Prediction", "Analytics", "About"],
         label_visibility="collapsed"
     )
     
@@ -406,7 +440,7 @@ with st.sidebar:
         """, unsafe_allow_html=True)
     
     st.markdown("---")
-    st.caption("🚀 Developed with Streamlit & Scikit-learn")
+    st.caption("Developed with Streamlit & Scikit-learn")
 
 # ============================================================
 # SAMPLE DATA
@@ -429,12 +463,12 @@ if "sample_values" not in st.session_state:
 # ============================================================
 # PAGE: PREDICTION
 # ============================================================
-if page == "🔍 Prediction":
+if page == "Prediction":
     
     # Header
     st.markdown("""
     <div class="page-header">
-        <div class="header-title">🏥 Breast Cancer Classification</div>
+        <div class="header-title">Breast Cancer Classification</div>
         <div class="header-subtitle">AI-Powered Diagnostic Assistant</div>
     </div>
     """, unsafe_allow_html=True)
@@ -442,7 +476,7 @@ if page == "🔍 Prediction":
     # Info Box
     st.markdown("""
     <div class="alert-info">
-        <div class="alert-title">⚠️ Important Disclaimer</div>
+        <div class="alert-title">Important Disclaimer</div>
         <p style="margin: 0; font-size: 0.9rem;">
             This tool is for educational and research purposes only. It does not replace professional medical diagnosis. Always consult with qualified healthcare professionals.
         </p>
@@ -455,7 +489,7 @@ if page == "🔍 Prediction":
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        if st.button("📋 Load Benign Sample", use_container_width=True):
+        if st.button("Load Benign Sample", use_container_width=True):
 
             st.session_state.sample_values = benign_sample
 
@@ -465,7 +499,7 @@ if page == "🔍 Prediction":
             st.rerun()
 
     with col2:
-        if st.button("⚠️ Load Malignant Sample", use_container_width=True):
+        if st.button("Load Malignant Sample", use_container_width=True):
 
             st.session_state.sample_values = malignant_sample
 
@@ -475,7 +509,7 @@ if page == "🔍 Prediction":
             st.rerun()
 
     with col3:
-        if st.button("🔄 Reset to Defaults", use_container_width=True):
+        if st.button("Reset to Defaults", use_container_width=True):
 
             default_values = feature_means.tolist()
 
@@ -488,21 +522,23 @@ if page == "🔍 Prediction":
     
     # Input Section
     st.markdown("---")
-    st.markdown("### 📋 Patient Data Input")
+    st.markdown("### Patient Data Input")
     
     st.markdown("""
-    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">
-        Use the sliders below to enter tumor measurements. Hover over feature names for detailed information.
-    </p>
+    <div style="background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%); border-left: 4px solid #0ea5e9; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
+        <p style="color: #0c4a6e; font-size: 1.05rem; font-weight: 500; margin: 0; line-height: 1.6;">
+            Use the sliders below to enter tumor measurements. Hover over feature names for detailed information.
+        </p>
+    </div>
     """, unsafe_allow_html=True)
     
     inputs = []
     
     categories = {
-        "📏 Tumor Size Features": list(range(0, 4)),
-        "🔷 Shape & Texture Features": list(range(4, 10)),
-        "⚖️ Measurement Error Features": list(range(10, 20)),
-        "⚡ Worst Case Features": list(range(20, 30))
+        "Tumor Size Features": list(range(0, 4)),
+        "Shape and Texture Features": list(range(4, 10)),
+        "Measurement Error Features": list(range(10, 20)),
+        "Worst Case Features": list(range(20, 30))
     }
     
     for category, indices in categories.items():
@@ -534,7 +570,7 @@ if page == "🔍 Prediction":
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col2:
-        predict_button = st.button("🔬 Analyze Tumor", use_container_width=True)
+        predict_button = st.button("Analyze Tumor", use_container_width=True)
     
     # Perform Prediction
     if predict_button:
@@ -549,13 +585,13 @@ if page == "🔍 Prediction":
         
         # Results Section
         st.markdown("---")
-        st.markdown("### 📊 Prediction Results")
+        st.markdown("### Prediction Results")
         
         # Main Result Card
         if prediction == 1:
             st.markdown("""
             <div class="alert-danger">
-                <div class="alert-title">⚠️ Malignant Tumor Detected</div>
+                <div class="alert-title">Malignant Tumor Detected</div>
                 <p style="margin: 0; font-size: 0.95rem;">
                     High probability of malignant tumor. Immediate medical consultation is strongly recommended.
                 </p>
@@ -565,7 +601,7 @@ if page == "🔍 Prediction":
         else:
             st.markdown("""
             <div class="alert-success">
-                <div class="alert-title">✅ Benign Tumor Detected</div>
+                <div class="alert-title">Benign Tumor Detected</div>
                 <p style="margin: 0; font-size: 0.95rem;">
                     Lower probability of malignant tumor, but follow-up with healthcare provider is recommended.
                 </p>
@@ -610,24 +646,27 @@ if page == "🔍 Prediction":
                 x=['Benign', 'Malignant'],
                 y=[benign_prob, malignant_prob],
                 marker=dict(
-                    color=['#059669', '#dc2626'],
-                    line=dict(color='white', width=2)
+                    color=['#10b981', '#ef4444'],
+                    line=dict(color='white', width=3),
+                    opacity=0.85
                 ),
                 text=[f'{benign_prob:.1f}%', f'{malignant_prob:.1f}%'],
                 textposition='outside',
-                hovertemplate='<b>%{x}</b><br>Probability: %{y:.1f}%<extra></extra>'
+                hovertemplate='<b>%{x}</b><br>Probability: %{y:.1f}%<extra></extra>',
+                textfont=dict(size=14, color='#1e40af', weight=600)
             )
         ])
         
         fig.update_layout(
             showlegend=False,
-            plot_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(240, 249, 255, 0.5)',
             paper_bgcolor='rgba(0,0,0,0)',
-            font=dict(family='Segoe UI, sans-serif', size=12),
+            font=dict(family='Segoe UI, sans-serif', size=13, color='#1e40af'),
             margin=dict(t=20, b=20, l=20, r=20),
             height=400,
-            xaxis=dict(showgrid=False),
-            yaxis=dict(showgrid=True, gridwidth=1, gridcolor='#e2e8f0')
+            xaxis=dict(showgrid=False, title='', tickfont=dict(size=13, color='#1e40af')),
+            yaxis=dict(showgrid=True, gridwidth=1, gridcolor='#e0f2fe', title='Probability (%)', tickfont=dict(size=12, color='#1e40af')),
+            hovermode='x unified'
         )
         
         st.plotly_chart(fig, use_container_width=True)
@@ -635,11 +674,11 @@ if page == "🔍 Prediction":
 # ============================================================
 # PAGE: ANALYTICS
 # ============================================================
-elif page == "📊 Analytics":
+elif page == "Analytics":
     
     st.markdown("""
     <div class="page-header">
-        <div class="header-title">📊 Model Benchmark Analytics</div>
+        <div class="header-title">Model Benchmark Analytics</div>
         <div class="header-subtitle">Performance Comparison of 14 ML Models</div>
     </div>
     """, unsafe_allow_html=True)
@@ -669,13 +708,13 @@ elif page == "📊 Analytics":
     }).sort_values("Accuracy", ascending=False).reset_index(drop=True)
     
     # Top Models
-    st.markdown("### 🏆 Top Performing Models")
+    st.markdown("### Top Performing Models")
     
     top_5 = benchmark_df.head(5)
     
     top_col1, top_col2, top_col3 = st.columns(3)
     
-    medals = ["🥇", "🥈", "🥉", "4️⃣", "5️⃣"]
+    medals = ["1st", "2nd", "3rd", "4th", "5th"]
     colors = ["#059669", "#0891b2", "#f59e0b", "#6b7280", "#6b7280"]
     
     for idx, (col, (_, row)) in enumerate(zip([top_col1, top_col2, top_col3, top_col1, top_col2], top_5.iterrows())):
@@ -691,7 +730,7 @@ elif page == "📊 Analytics":
     
     # Full Comparison
     st.markdown("---")
-    st.markdown("### 📈 Detailed Model Comparison")
+    st.markdown("### Detailed Model Comparison")
     
     # Create interactive chart
     fig = px.bar(
@@ -701,17 +740,19 @@ elif page == "📊 Analytics":
         title="Model Accuracy Comparison",
         labels={"Accuracy": "Accuracy Score"},
         color="Accuracy",
-        color_continuous_scale="Blues"
+        color_continuous_scale="Viridis"
     )
     
     fig.update_layout(
         showlegend=False,
-        plot_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(240, 249, 255, 0.5)',
         paper_bgcolor='rgba(0,0,0,0)',
-        font=dict(family='Segoe UI, sans-serif', size=11),
+        font=dict(family='Segoe UI, sans-serif', size=11, color='#1e40af'),
         xaxis_tickangle=-45,
         height=500,
-        margin=dict(b=100)
+        margin=dict(b=100),
+        hovermode='x unified',
+        title={'font': {'size': 16, 'color': '#1e40af'}}
     )
     
     fig.update_traces(
@@ -722,7 +763,7 @@ elif page == "📊 Analytics":
     st.plotly_chart(fig, use_container_width=True)
     
     # Statistics
-    st.markdown("### 📊 Key Insights")
+    st.markdown("### Key Insights")
     
     stat_col1, stat_col2, stat_col3, stat_col4 = st.columns(4)
     
@@ -760,7 +801,7 @@ elif page == "📊 Analytics":
     
     # Data Table
     st.markdown("---")
-    st.markdown("### 📋 Complete Model Rankings")
+    st.markdown("### Complete Model Rankings")
     
     display_df = benchmark_df.copy()
     display_df["Accuracy"] = display_df["Accuracy"].apply(lambda x: f"{x*100:.2f}%")
@@ -776,7 +817,7 @@ else:
 
     st.markdown("""
     <div class="page-header">
-        <div class="header-title">ℹ️ About This Project</div>
+        <div class="header-title">About This Project</div>
         <div class="header-subtitle">
             Research-Oriented Machine Learning Framework for Breast Cancer Classification
         </div>
@@ -789,7 +830,7 @@ else:
     st.markdown("""
     <div class="card">
 
-    <div class="card-header">🧠 Project Overview</div>
+    <div class="card-header">Project Overview</div>
 
     <p>
     This project presents a research-oriented end-to-end machine learning system
@@ -822,7 +863,7 @@ else:
         st.markdown("""
         <div class="card">
 
-        <div class="card-header">📊 Dataset & Feature Space</div>
+        <div class="card-header">Dataset & Feature Space</div>
 
         <ul style="padding-left: 1.5rem; color: var(--text-light);">
 
@@ -860,7 +901,7 @@ else:
         st.markdown("""
         <div class="card">
 
-        <div class="card-header">⚙️ Preprocessing Pipelines</div>
+        <div class="card-header">Preprocessing Pipelines</div>
 
         <p>
         Three independent preprocessing pipelines were designed and benchmarked
@@ -906,7 +947,7 @@ else:
     st.markdown("""
     <div class="card">
 
-    <div class="card-header">🤖 Machine Learning Models Evaluated</div>
+    <div class="card-header">Machine Learning Models Evaluated</div>
 
     <p>
     A total of 14 machine learning algorithms were benchmarked across all preprocessing pipelines.
@@ -983,7 +1024,7 @@ else:
         st.markdown("""
         <div class="card">
 
-        <div class="card-header">🏆 Best Performing Pipeline</div>
+        <div class="card-header">Best Performing Pipeline</div>
 
         <p>
 
@@ -1013,7 +1054,7 @@ else:
         st.markdown("""
         <div class="card">
 
-        <div class="card-header">📈 Evaluation Methodology</div>
+        <div class="card-header">Evaluation Methodology</div>
 
         <p>
         Models were evaluated using stratified train-test splitting
@@ -1054,7 +1095,7 @@ else:
     st.markdown("""
     <div class="card">
 
-    <div class="card-header">🚀 Deployment Architecture</div>
+    <div class="card-header">Deployment Architecture</div>
 
     <p>
     The final production pipeline integrates preprocessing,
@@ -1089,7 +1130,7 @@ else:
     # TECHNOLOGY STACK
     # =========================================================
     st.markdown("---")
-    st.markdown("### 🛠️ Technology Stack")
+    st.markdown("### Technology Stack")
 
     tech1, tech2, tech3 = st.columns(3)
 
@@ -1099,7 +1140,7 @@ else:
         <div class="card">
 
         <div style="font-weight: 600; color: var(--primary); margin-bottom: 1rem;">
-        📦 Core Libraries
+        Core Libraries
         </div>
 
         <ul style="padding-left: 1.5rem;">
@@ -1118,7 +1159,7 @@ else:
         <div class="card">
 
         <div style="font-weight: 600; color: var(--primary); margin-bottom: 1rem;">
-        🎨 Frontend & Visualization
+        Frontend & Visualization
         </div>
 
         <ul style="padding-left: 1.5rem;">
@@ -1137,7 +1178,7 @@ else:
         <div class="card">
 
         <div style="font-weight: 600; color: var(--primary); margin-bottom: 1rem;">
-        ⚙️ ML Concepts
+        ML Concepts
         </div>
 
         <ul style="padding-left: 1.5rem;">
@@ -1159,7 +1200,7 @@ else:
     <div style="text-align: center; padding: 2rem; color: #ffffff;">
 
     <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">
-    <strong>🏥 Breast Cancer Classification System</strong>
+    <strong>Breast Cancer Classification System</strong>
     </p>
 
     <p style="font-size: 0.95rem;">
@@ -1171,7 +1212,7 @@ else:
     </p>
 
     <p style="margin-top: 1rem; font-size: 0.8rem;">
-    ⚠️ This system is intended for educational and research purposes only
+    This system is intended for educational and research purposes only
     and should not be considered a substitute for professional medical diagnosis.
     </p>
 
