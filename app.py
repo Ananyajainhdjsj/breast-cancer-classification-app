@@ -161,7 +161,7 @@ st.markdown("""
     .card-header {
         font-size: 1.5rem;
         font-weight: 600;
-        color: #000000;
+        color: #ffffff;
         margin-bottom: 1.5rem;
         display: flex;
         align-items: center;
