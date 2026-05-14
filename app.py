@@ -37,8 +37,8 @@ st.markdown("""
         --warning: #f59e0b;
         --bg-light: #f8fafc;
         --border: #e2e8f0;
-        --text-dark: #000000;
-        --text-light: #000000;
+        --text-dark: #ffffff;
+        --text-light: #ffffff;
     }
     
     body {
@@ -957,7 +957,7 @@ else:
 
         <div class="card-header">Dataset & Feature Space</div>
 
-        <ul style="padding-left: 1.5rem; color: var(--text-light);">
+        <ul style="padding-left: 1.5rem; color: #ffffff;">
 
         <li><strong>Dataset:</strong> Wisconsin Breast Cancer Dataset</li>
 
@@ -971,11 +971,11 @@ else:
 
         </ul>
 
-        <p>
+        <p style="color: #ffffff;">
         Feature groups include:
         </p>
 
-        <ul style="padding-left: 1.5rem; color: var(--text-light);">
+        <ul style="padding-left: 1.5rem; color: #ffffff;">
 
         <li>Radius-based geometric measurements</li>
         <li>Texture and smoothness descriptors</li>
@@ -1000,7 +1000,7 @@ else:
         to evaluate the impact of feature engineering strategies on model performance.
         </p>
 
-        <ol style="padding-left: 1.5rem; color: var(--text-light);">
+        <ol style="padding-left: 1.5rem; color: #ffffff;">
 
         <li>
         <strong>Pipeline 1: Full Feature Space</strong><br>
@@ -1051,9 +1051,9 @@ else:
 
     <div>
 
-    <strong>Linear & Statistical Models</strong>
+    <strong style="color: #ffffff;">Linear & Statistical Models</strong>
 
-    <ul style="padding-left: 1.5rem; color: var(--text-light);">
+    <ul style="padding-left: 1.5rem; color: #ffffff;">
     <li>Logistic Regression</li>
     <li>Linear Discriminant Analysis (LDA)</li>
     <li>Quadratic Discriminant Analysis (QDA)</li>
@@ -1064,9 +1064,9 @@ else:
 
     <div>
 
-    <strong>Distance & Margin-Based Models</strong>
+    <strong style="color: #ffffff;">Distance & Margin-Based Models</strong>
 
-    <ul style="padding-left: 1.5rem; color: var(--text-light);">
+    <ul style="padding-left: 1.5rem; color: #ffffff;">
     <li>K-Nearest Neighbors</li>
     <li>Support Vector Machine (Linear)</li>
     <li>Support Vector Machine (RBF)</li>
@@ -1076,9 +1076,9 @@ else:
 
     <div>
 
-    <strong>Tree-Based Models</strong>
+    <strong style="color: #ffffff;">Tree-Based Models</strong>
 
-    <ul style="padding-left: 1.5rem; color: var(--text-light);">
+    <ul style="padding-left: 1.5rem; color: #ffffff;">
     <li>Decision Tree</li>
     <li>Random Forest</li>
     <li>Extra Trees</li>
@@ -1088,9 +1088,9 @@ else:
 
     <div>
 
-    <strong>Ensemble Learning Models</strong>
+    <strong style="color: #ffffff;">Ensemble Learning Models</strong>
 
-    <ul style="padding-left: 1.5rem; color: var(--text-light);">
+    <ul style="padding-left: 1.5rem; color: #ffffff;">
     <li>AdaBoost</li>
     <li>Gradient Boosting</li>
     <li>Bagging Classifier</li>
@@ -1118,7 +1118,7 @@ else:
 
         <div class="card-header">Best Performing Pipeline</div>
 
-        <p>
+        <p style="color: #ffffff;">
 
         <strong>Final Deployed Model:</strong> AdaBoost Classifier<br><br>
 
@@ -1132,7 +1132,7 @@ else:
 
         </p>
 
-        <p>
+        <p style="color: #ffffff;">
         Ensemble boosting methods consistently demonstrated superior
         classification robustness and higher discriminative capability
         compared to standalone classifiers.
@@ -1148,12 +1148,12 @@ else:
 
         <div class="card-header">Evaluation Methodology</div>
 
-        <p>
+        <p style="color: #ffffff;">
         Models were evaluated using stratified train-test splitting
         to preserve class distribution across target categories.
         </p>
 
-        <ul style="padding-left: 1.5rem; color: var(--text-light);">
+        <ul style="padding-left: 1.5rem; color: #ffffff;">
 
         <li>Train-Test Split: 80/20</li>
         <li>Random State Control for Reproducibility</li>
@@ -1162,11 +1162,11 @@ else:
 
         </ul>
 
-        <p>
+        <p style="color: #ffffff;">
         Performance evaluation included:
         </p>
 
-        <ul style="padding-left: 1.5rem; color: var(--text-light);">
+        <ul style="padding-left: 1.5rem; color: #ffffff;">
 
         <li>Accuracy</li>
         <li>Precision</li>
@@ -1189,18 +1189,18 @@ else:
 
     <div class="card-header">Deployment Architecture</div>
 
-    <p>
+    <p style="color: #ffffff;">
     The final production pipeline integrates preprocessing,
     dimensionality reduction, and classification into a unified
     Scikit-learn deployment pipeline serialized using Joblib.
     </p>
 
-    <p>
+    <p style="color: #ffffff;">
     Real-time predictions are served through an interactive Streamlit
     web application featuring:
     </p>
 
-    <ul style="padding-left: 1.5rem; color: var(--text-light);">
+    <ul style="padding-left: 1.5rem; color: #ffffff;">
 
     <li>Interactive patient feature simulation</li>
     <li>Real-time probabilistic inference</li>
@@ -1210,7 +1210,7 @@ else:
 
     </ul>
 
-    <p>
+    <p style="color: #ffffff;">
     The deployment architecture ensures preprocessing consistency
     between training and inference environments through serialized ML pipelines.
     </p>
@@ -1231,11 +1231,11 @@ else:
         st.markdown("""
         <div class="card">
 
-        <div style="font-weight: 600; color: var(--primary); margin-bottom: 1rem;">
+        <div style="font-weight: 600; color: #ffffff; margin-bottom: 1rem;">
         Core Libraries
         </div>
 
-        <ul style="padding-left: 1.5rem;">
+        <ul style="padding-left: 1.5rem; color: #ffffff;">
         <li>Scikit-learn</li>
         <li>Pandas</li>
         <li>NumPy</li>
@@ -1250,11 +1250,11 @@ else:
         st.markdown("""
         <div class="card">
 
-        <div style="font-weight: 600; color: var(--primary); margin-bottom: 1rem;">
+        <div style="font-weight: 600; color: #ffffff; margin-bottom: 1rem;">
         Frontend & Visualization
         </div>
 
-        <ul style="padding-left: 1.5rem;">
+        <ul style="padding-left: 1.5rem; color: #ffffff;">
         <li>Streamlit</li>
         <li>Plotly</li>
         <li>Custom CSS</li>
@@ -1269,11 +1269,11 @@ else:
         st.markdown("""
         <div class="card">
 
-        <div style="font-weight: 600; color: var(--primary); margin-bottom: 1rem;">
+        <div style="font-weight: 600; color: #ffffff; margin-bottom: 1rem;">
         ML Concepts
         </div>
 
-        <ul style="padding-left: 1.5rem;">
+        <ul style="padding-left: 1.5rem; color: #ffffff;">
         <li>Feature Engineering</li>
         <li>PCA Optimization</li>
         <li>Ensemble Learning</li>
